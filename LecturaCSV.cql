@@ -12,7 +12,7 @@ LOAD CSV WITH HEADERS FROM 'file:///INDIVIDUAL.csv' AS row
 WITH toInteger(row.Id) AS id, datetime(replace(row.Year,' ','T')) AS any, row.name AS nom, row.surname AS cognom, row.second_surname AS cognom2
 WHERE id IS NOT NULL
 MERGE (i:Individual {id: id})
-SET i.any = any, i.name = name, i.cognom = cognom, i.cognom2 = cognom2
+SET i.any = any, i.nom = nom, i.cognom = cognom, i.cognom2 = cognom2
 return id, any, nom,cognom, cognom2
 limit 10;
 
@@ -20,7 +20,7 @@ limit 10;
 LOAD CSV WITH HEADERS FROM 'file:///FAMILIA.csv' as row
 WITH toInteger(row.ID_1) AS id1, toInteger(row.ID_2) AS id2, row.Relacio AS relacio, row.Relacio_Harmonitzada AS relacioH
 WHERE id1 IS NOT NULL AND id2 IS NOT NULL 
-MATCH (p1:Invidual {id: id1})
+MATCH (p1:Individual {id: id1})
 MATCH (p2:Individual {id: id2})
 MERGE (p1)-[rel:FAMILIA {relacio: relacio, relacioH: relacioH}]->(p2)
 return id1, relacio, relacioH, id2
@@ -44,3 +44,6 @@ MATCH (h:Habitatge {municipi: ubi, idLlar: idCasa})
 MERGE (p)-[rel:VIU]->(h)
 return ind, ubi, anyViu, idCasa
 limit 10;
+
+// Mirem l'esquema del graf
+CALL db.schema.visualization()
