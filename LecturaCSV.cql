@@ -26,7 +26,7 @@ MATCH (p1:Individual {id: id1})
 MATCH (p2:Individual {id: id2})
 MERGE (p1)-[rel:FAMILIA {relacio: relacio, relacioH: relacioH}]->(p2)
 WITH p1, p2, rel
-return p1.id1, rel.relacio, rel.relacioH, p2.id2
+return p1.id, rel.relacio, rel.relacioH, p2.id
 limit 10;
 
 // Creació relacions SAME_AS
@@ -36,7 +36,7 @@ MATCH (p1:Individual {id: idA})
 MATCH (p2:Individual {id: idB})
 MERGE (p1)-[rel:SAME_AS]->(p2)
 WITH p1, p2
-return p1.idA, p2.idB
+return p1.id, p2.id
 limit 10;
 
 // Creació relacions VIU
@@ -47,7 +47,7 @@ MATCH (p:Individual {id: ind, any: anyViu})
 MATCH (h:Habitatge {municipi: ubi, idLlar: idCasa, anyPadro: anyViu})
 MERGE (p)-[rel:VIU]->(h)
 WITH p, h
-return p.ind, h.ubi, p.anyViu, h.anyPadro, h.idCasa
+return p.id, h.municipi, p.any, h.anyPadro, h.idLlar
 limit 10;
 
 // Mirem l'esquema del graf
