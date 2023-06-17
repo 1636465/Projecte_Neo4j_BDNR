@@ -16,6 +16,9 @@ RETURN i, i2
 // Consulta 6
 
 // Consulta 7
+MATCH (p:Individual)-[r]->(rel:Individual)
+WHERE p.nom = 'benito' AND p.cognom = 'julivert'
+RETURN rel.nom AS Nom, rel.cognom AS Cognom1, rel.cognom2 AS Cognom2, type(r) AS TipusRelacio
 
 // Consulta 8
 
