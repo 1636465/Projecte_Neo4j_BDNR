@@ -25,6 +25,12 @@ RETURN rel.nom AS Nom, rel.cognom AS Cognom1, rel.cognom2 AS Cognom2, type(r) AS
 // Consulta 9
 
 // Consulta 10 
+MATCH (h:Habitatge)
+WHERE h.carrer IS NOT NULL AND h.numero IS NOT NULL AND h.municipi = "SFLL"
+WITH h.carrer AS carrer, h.numero AS numero, count(*) AS totalPadrons, collect(DISTINCT h.anyPadro) AS anysPadro, collect(DISTINCT h.idLlar) AS idsLlar
+RETURN carrer, numero, totalPadrons, anysPadro, idsLlar
+ORDER BY totalPadrons DESC
+LIMIT 15
 
 // Consulta 11 
 MATCH (h:Habitatge)-[:VIU]-(i:Individual)-[fam:FAMILIA]->(f:Individual)
