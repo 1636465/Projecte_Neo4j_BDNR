@@ -2,8 +2,8 @@
 LOAD CSV WITH HEADERS FROM 'file:///HABITATGES.csv' as row
 WITH toInteger(row.Id_Llar) AS idLlar, row.Municipi AS municipi, datetime(replace(row.Any_Padro,' ','T')) AS anyPadro, row.Carrer AS carrer, toInteger(row.Numero) AS numero 
 WHERE idLlar <> "null" AND municipi <> "null"
-MERGE (h:Habitatge {idLlar: idLlar})
-ON CREATE SET h.municipi = municipi, h.anyPadro = anyPadro, h.carrer = carrer, h.numero = numero
+MERGE (h:Habitatge {idLlar: idLlar, municipi: municipi})
+ON CREATE SET h.anyPadro = anyPadro, h.carrer = carrer, h.numero = numero
 WITH h
 return h.idLlar, h.municipi, h.anyPadro, h.carrer, h.numero
 limit 10;
