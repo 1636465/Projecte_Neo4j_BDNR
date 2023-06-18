@@ -60,6 +60,18 @@ ORDER BY num_fills DESC
 LIMIT 20
 
 // Consulta 12
+CALL {
+  MATCH (h:Habitatge {municipi: "SFLL", anyPadro: datetime("1881-01-01T00:00:00Z")})
+  WITH COUNT(DISTINCT h) AS nombreHabitatges
+  RETURN nombreHabitatges
+} 
+
+MATCH (h:Habitatge {municipi: "SFLL", anyPadro:
+datetime("1881-01-01T00:00:00Z")})<-[:VIU]-(i:Individual)
+WHERE (((i)-[:FAMILIA {relacio: "hijo"}]->() OR (i)-[:FAMILIA {relacio: "hija"}]->()) OR ((i)-[:FAMILIA {relacioH: "fill"}]->() OR (i)-[:FAMILIA {relacioH: "filla"}]->())) OR  (((i)-[:FAMILIA {relacio: "hijo"}]->() OR (i)-[:FAMILIA {relacio: "hija"}]->()) AND ((i)-[:FAMILIA {relacioH: "fill"}]->() OR (i)-[:FAMILIA {relacioH: "filla"}]->()))
+WITH COUNT(i) AS totalFillsPerHabitatge, nombreHabitatges
+RETURN totalFillsPerHabitatge, nombreHabitatges,
+toFloat(totalFillsPerHabitatge)/toFloat(nombreHabitatges) AS mitjanaFillsPerHabitatge
 
 // Consulta 13
 MATCH (i:Individual)-[:VIU]->(h:Habitatge)
