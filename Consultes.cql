@@ -36,6 +36,10 @@ WHERE p.nom = 'benito' AND p.cognom = 'julivert'
 RETURN rel.nom AS Nom, rel.cognom AS Cognom1, rel.cognom2 AS Cognom2, r.relacioH AS TipusRelacio
         
 // Consulta 8
+MATCH (p:Individual)-[r:FAMILIA]->(rel:Individual)
+WHERE p.nom = 'benito' AND p.cognom = 'julivert' AND (r.relacioH = 'fill' OR r.relacioH = 'filla')
+RETURN rel.nom AS Nom, rel.cognom AS Cognom1, rel.cognom2 AS Cognom2, r.relacioH AS TipusRelacio
+ORDER BY Nom
 
 // Consulta 9
 MATCH (p1)-[rel:FAMILIA]->(p2)
