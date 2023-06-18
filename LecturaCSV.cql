@@ -52,3 +52,20 @@ limit 10;
 
 // Mirem l'esquema del graf
 CALL db.schema.visualization()
+
+// Creació de constraints
+CREATE CONSTRAINT UniqueidIndividualConstraint 
+FOR (i:Individual) REQUIRE i.id IS UNIQUE
+
+CREATE CONSTRAINT ExistsIndId FOR (i:Individual) REQUIRE i.id IS NOT NULL
+
+CREATE CONSTRAINT ExistsIdhabitatge 
+FOR (h:Habitatge) REQUIRE h.idLlar IS NOT NULL
+
+CREATE CONSTRAINT Existsmunicipihabitatge 
+FOR (h:Habitatge) REQUIRE h.municipi IS NOT NULL
+
+CREATE CONSTRAINT UniqueIdMunicipiConstraint 
+FOR  (h:Habitatge)  REQUIRE (h.idLlar, h.municipi) IS NODE KEY
+
+
