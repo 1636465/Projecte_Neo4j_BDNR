@@ -31,10 +31,10 @@ WHERE i.nom = "miguel" AND i.cognom = "estape" AND i.cognom2 = "bofill"
 RETURN DISTINCT i.nom AS nom, COLLECT(DISTINCT i2.cognom) AS cognoms, COLLECT(DISTINCT i2.cognom2) AS cognoms2
 
 // Consulta 7
-MATCH (p:Individual)-[r]->(rel:Individual)
+MATCH (p:Individual)-[r:FAMILIA]->(rel:Individual)
 WHERE p.nom = 'benito' AND p.cognom = 'julivert'
-RETURN rel.nom AS Nom, rel.cognom AS Cognom1, rel.cognom2 AS Cognom2, type(r) AS TipusRelacio
-
+RETURN rel.nom AS Nom, rel.cognom AS Cognom1, rel.cognom2 AS Cognom2, r.relacioH AS TipusRelacio
+        
 // Consulta 8
 
 // Consulta 9
