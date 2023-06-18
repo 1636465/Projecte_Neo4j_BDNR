@@ -11,6 +11,11 @@ RETURN h.anyPadro AS anyPadro,count(p) AS numHabitants, collect(DISTINCT p.cogno
 
 // Consulta 4
 
+MATCH (p:Individual)-[:VIU]->(h:Habitatge)
+WHERE p.name="rafel" AND p.surname = "marti" AND p.second_surname= "nan" AND h.municipi = "SFLL" AND datetime(h.anyPadro).year = 1838 
+MATCH (h)<-[:VIU]-(other:Individual)
+RETURN other.name
+
 // Consulta 5
 MATCH (i:Individual)-[:SAME_AS]-(i2: Individual) 
 WHERE i.nom = "miguel" AND i.cognom = "estape" AND i.cognom2 = "bofill"
