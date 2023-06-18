@@ -3,6 +3,9 @@ MATCH (h:Habitatge {anyPadro: datetime("1866"), municipi: "CR"}) <— [:VIU] —
 RETURN COUNT(i), collect(i.cognom)
 
 // Consulta 2
+MATCH (p:Individual)-[:VIU]->(h:Habitatge {municipi: 'SFLL'})
+WHERE p.cognom IS NOT NULL AND p.cognom <> 'nan' 
+RETURN h.anyPadro AS anyPadro,count(p) AS numHabitants, collect(DISTINCT p.cognom) AS cognoms
 
 // Consulta 3
 
