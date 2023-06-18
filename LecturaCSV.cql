@@ -68,4 +68,12 @@ FOR (h:Habitatge) REQUIRE h.municipi IS NOT NULL
 CREATE CONSTRAINT UniqueIdMunicipiConstraint 
 FOR  (h:Habitatge)  REQUIRE (h.idLlar, h.municipi) IS NODE KEY
 
+// Creació de Indexes
+CREATE INDEX nomIndividu FOR (i:Individu) ON (i.nom)
+CREATE INDEX anymunicipiHabitatges FOR (h:Habitatge) ON (h.anyPadro,h.municipi)
+CREATE INDEX anyIndividu FOR (i:Individu) ON (i.any)
+CREATE INDEX anyPadro FOR (h:Habitatge) ON (h.anyPadro)
+CREATE INDEX carrernumeroHabitatges FOR (h:Habitatge) ON (h.carrer,h.numero)
+
+
 
