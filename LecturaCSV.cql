@@ -51,7 +51,7 @@ return p.id, h.municipi, p.any, h.anyPadro, h.idLlar
 limit 10;
 
 // Mirem l'esquema del graf
-CALL db.schema.visualization()
+CALL db.schema.visualization();
 
 // Creació de constraints
 CREATE CONSTRAINT UniqueidIndividualConstraint 
